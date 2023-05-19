@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import log.Logger;
 
+import static gui.Constants.GameVisualizerConstants.*;
 import static gui.Constants.MainApplicationFrameConstants.*;
 
 public class MainApplicationFrame extends JFrame {
@@ -20,12 +21,13 @@ public class MainApplicationFrame extends JFrame {
                 screenSize.height - SCREEN_OFFSET * 2);
 
         setContentPane(desktopPane);
-
+        Robot robot = new Robot(ROBOT_INITIAL_X_COORDINATE, ROBOT_INITIAL_Y_COORDINATE, ROBOT_INITIAL_DIRECTION);
+        Target target = new Target(TARGET_INITIAL_X_COORDINATE, TARGET_INITIAL_Y_COORDINATE);
 
         LogWindow logWindow = createLogWindow();
         addWindow(logWindow);
 
-        GameWindow gameWindow = new GameWindow();
+        GameWindow gameWindow = new GameWindow(robot, target);
         gameWindow.setSize(INITIAL_GAME_WINDOW_WIDTH, INITIAL_GAME_WINDOW_HEIGHT);
         addWindow(gameWindow);
 
@@ -80,6 +82,7 @@ public class MainApplicationFrame extends JFrame {
         JMenuItem addLogMessageItem = new JMenuItem(TEST_LOG_OPTION_TEXT, KeyEvent.VK_S);
         addLogMessageItem.addActionListener(event -> Logger.debug(TEST_LOG_TEXT));
         testMenu.add(addLogMessageItem);
+
 
         return testMenu;
     }

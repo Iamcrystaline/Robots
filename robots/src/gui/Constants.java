@@ -25,6 +25,8 @@ public interface Constants {
         public static final String STYLE_MENU_TEXT = "Режим отображения";
         public static final String CROSS_PLATFORM_STYLE_TEXT = "Универсальная схема";
         public static final String SYSTEM_STYLE_TEXT = "Системная схема";
+        public static final String ROBOT_START_MOVING = "Робот двигается";
+        public static final String ROBOT_STOP_MOVING = "Робот остановился";
     }
 
     class RobotsProgramConstants {
@@ -71,5 +73,9 @@ public interface Constants {
 
     class LoggerConstants {
         public static final int LOGGER_IQUEUE_LENGTH = 100;
+    }
+
+    class KeyEventListenerConstants {
+        public static final double TARGET_VELOCITY = 0.1;
     }
 }
