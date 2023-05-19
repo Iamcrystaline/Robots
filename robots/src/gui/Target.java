@@ -38,8 +38,8 @@ public class Target extends GameModel implements Moveable {
         AffineTransform t = AffineTransform.getRotateInstance(TARGET_THETA, TARGET_ANCHORX, TARGET_ANCHORY);
         g.setTransform(t);
         g.setColor(Color.GREEN);
-        int targetCenterX = MathModule.round(getxCoordinate());
-        int targetCenterY = MathModule.round(getyCoordinate());
+        int targetCenterX = MathModule.round(getXCoordinate());
+        int targetCenterY = MathModule.round(getYCoordinate());
         GameVisualizer.fillOval(g, targetCenterX, targetCenterY, TARGET_DIAMETER, TARGET_DIAMETER);
         g.setColor(Color.BLACK);
         GameVisualizer.drawOval(g, targetCenterX, targetCenterY, TARGET_DIAMETER, TARGET_DIAMETER);
@@ -47,9 +47,9 @@ public class Target extends GameModel implements Moveable {
 
     @Override
     public void move() {
-        double newTargetXCoordinate = getxCoordinate() + getHorizontalVelocity() * TIMER_UPDATE_PERIOD;
-        double newTargetYCoordinate = getyCoordinate() + getVerticalVelocity() * TIMER_UPDATE_PERIOD;
-        setxCoordinate(newTargetXCoordinate);
-        setyCoordinate(newTargetYCoordinate);
+        double newTargetXCoordinate = getXCoordinate() + getHorizontalVelocity() * TIMER_UPDATE_PERIOD;
+        double newTargetYCoordinate = getYCoordinate() + getVerticalVelocity() * TIMER_UPDATE_PERIOD;
+        setXCoordinate(newTargetXCoordinate);
+        setYCoordinate(newTargetYCoordinate);
     }
 }

@@ -2,6 +2,9 @@ package gui;
 
 import java.awt.Graphics;
 
+/**
+ * View class in MVC model. This class paints the components of the game.
+ */
 public class GameVisualizer {
 
     public static void fillOval(Graphics g, int centerXCoordinate, int centerYCoordinate, int firstDiameter, int secondDiameter) {

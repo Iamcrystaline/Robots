@@ -86,13 +86,6 @@ public class MainApplicationFrame extends JFrame {
 
         return testMenu;
     }
-    public static void updateStateRobot(boolean isRobotMoving) {
-        if (isRobotMoving) {
-            Logger.debug(ROBOT_START_MOVING);
-        } else {
-            Logger.debug(ROBOT_STOP_MOVING);
-        }
-    }
 
     private JMenu createLookAndFeelMenu() {
         JMenu styleMenu = new JMenu(STYLE_MENU_TEXT);

@@ -2,31 +2,40 @@ package gui;
 
 import java.awt.*;
 
+/**
+ * Model class for each object in the game.
+ */
 public abstract class GameModel {
 
-    private double xCoordinate;
-    private double yCoordinate;
+    private double XCoordinate;
+    private double YCoordinate;
 
-    public GameModel(double xCoordinate, double yCoordinate) {
-        this.xCoordinate = xCoordinate;
-        this.yCoordinate = yCoordinate;
+    public GameModel(double XCoordinate, double YCoordinate) {
+        this.XCoordinate = XCoordinate;
+        this.YCoordinate = YCoordinate;
     }
 
-    public double getxCoordinate() {
-        return xCoordinate;
+    public double getXCoordinate() {
+        return XCoordinate;
     }
 
-    public void setxCoordinate(double xCoordinate) {
-        this.xCoordinate = xCoordinate;
+    public void setXCoordinate(double XCoordinate) {
+        this.XCoordinate = XCoordinate;
     }
 
-    public double getyCoordinate() {
-        return yCoordinate;
+    public double getYCoordinate() {
+        return YCoordinate;
     }
 
-    public void setyCoordinate(double yCoordinate) {
-        this.yCoordinate = yCoordinate;
+    public void setYCoordinate(double YCoordinate) {
+        this.YCoordinate = YCoordinate;
     }
+
+    /**
+     * Method for painting the object on the game field
+     *
+     * @param g - graphics object to paint
+     */
 
     public abstract void draw(Graphics2D g);
 }

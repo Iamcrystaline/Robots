@@ -11,6 +11,15 @@ public class Robot extends GameModel implements Moveable {
 
     private volatile double direction;
     private double angularVelocity;
+    private boolean isMoving;
+
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+    public void setMoving(boolean moving) {
+        isMoving = moving;
+    }
 
     public double getAngularVelocity() {
         return angularVelocity;
@@ -35,8 +44,8 @@ public class Robot extends GameModel implements Moveable {
 
     @Override
     public void draw(Graphics2D g) {
-        int robotCenterX = MathModule.round(getxCoordinate());
-        int robotCenterY = MathModule.round(getyCoordinate());
+        int robotCenterX = MathModule.round(getXCoordinate());
+        int robotCenterY = MathModule.round(getYCoordinate());
         AffineTransform t = AffineTransform.getRotateInstance(getDirection(), robotCenterX, robotCenterY);
         g.setTransform(t);
         g.setColor(Color.MAGENTA);
@@ -52,10 +61,10 @@ public class Robot extends GameModel implements Moveable {
     @Override
     public void move() {
         double newRobotDirection = getDirection() + getAngularVelocity() * TIMER_UPDATE_PERIOD;
-        double newRobotXCoordinate = getxCoordinate() + ROBOT_VELOCITY * TIMER_UPDATE_PERIOD * Math.cos(getDirection());
-        double newRobotYCoordinate = getyCoordinate() + ROBOT_VELOCITY * TIMER_UPDATE_PERIOD * Math.sin(getDirection());
-        setxCoordinate(newRobotXCoordinate);
-        setyCoordinate(newRobotYCoordinate);
+        double newRobotXCoordinate = getXCoordinate() + ROBOT_VELOCITY * TIMER_UPDATE_PERIOD * Math.cos(getDirection());
+        double newRobotYCoordinate = getYCoordinate() + ROBOT_VELOCITY * TIMER_UPDATE_PERIOD * Math.sin(getDirection());
+        setXCoordinate(newRobotXCoordinate);
+        setYCoordinate(newRobotYCoordinate);
         setDirection(MathModule.asNormalizedRadians(newRobotDirection));
 
     }

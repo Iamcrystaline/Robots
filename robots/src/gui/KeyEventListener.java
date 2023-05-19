@@ -5,6 +5,9 @@ import java.awt.event.KeyEvent;
 
 import static gui.Constants.KeyEventListenerConstants.TARGET_VELOCITY;
 
+/**
+ * Listener class for keyboard typing/pressing/releasing.
+ */
 public class KeyEventListener extends KeyAdapter {
 
     private final Target target;
@@ -18,6 +21,11 @@ public class KeyEventListener extends KeyAdapter {
         keyPressed(e);
     }
 
+    /**
+     * Depends on the user's action, changes the target's velocity.
+     *
+     * @param e - pressed key
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
@@ -41,6 +49,11 @@ public class KeyEventListener extends KeyAdapter {
         }
     }
 
+    /**
+     * Resets the target's velocity
+     *
+     * @param e - released key
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         target.setHorizontalVelocity(0);

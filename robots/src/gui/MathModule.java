@@ -1,5 +1,8 @@
 package gui;
 
+/**
+ * Class for needed math operations.
+ */
 public class MathModule {
 
     public static int round(double number) {
