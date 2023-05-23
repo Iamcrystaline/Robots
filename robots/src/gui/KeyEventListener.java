@@ -3,8 +3,6 @@ package gui;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import static gui.Constants.KeyEventListenerConstants.TARGET_VELOCITY;
-
 /**
  * Listener class for keyboard typing/pressing/releasing.
  */
@@ -31,19 +29,19 @@ public class KeyEventListener extends KeyAdapter {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case KeyEvent.VK_DOWN: {
-                target.setVerticalVelocity(TARGET_VELOCITY);
+                target.setVerticalMoveMode(1);
                 break;
             }
             case KeyEvent.VK_UP: {
-                target.setVerticalVelocity(-TARGET_VELOCITY);
+                target.setVerticalMoveMode(-1);
                 break;
             }
             case KeyEvent.VK_RIGHT: {
-                target.setHorizontalVelocity(TARGET_VELOCITY);
+                target.setHorizontalMoveMode(1);
                 break;
             }
             case KeyEvent.VK_LEFT: {
-                target.setHorizontalVelocity(-TARGET_VELOCITY);
+                target.setHorizontalMoveMode(-1);
                 break;
             }
         }
@@ -56,7 +54,12 @@ public class KeyEventListener extends KeyAdapter {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        target.setHorizontalVelocity(0);
-        target.setVerticalVelocity(0);
+        int keyCode = e.getKeyCode();
+        if (keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_UP) {
+            target.setVerticalMoveMode(0);
+        }
+        if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT) {
+            target.setHorizontalMoveMode(0);
+        }
     }
 }

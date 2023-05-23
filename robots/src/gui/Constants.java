@@ -49,8 +49,8 @@ public interface Constants {
 
     class GameVisualizerConstants {
 
-        public static final double ROBOT_VELOCITY = 0.1;
-        public static final double MAX_ANGULAR_VELOCITY = 0.001;
+        public static final double ROBOT_DEFAULT_VELOCITY = 0.1;
+        public static final double MAX_ANGULAR_VELOCITY = 0.005;
         public static final double ROBOT_STOP_DISTANCE = 0.5;
         public static final String TIMER_NAME = "events generator";
         public static final int TIMER_DELAY = 0;
@@ -63,19 +63,28 @@ public interface Constants {
         public static final int ROBOT_BODY_SECOND_DIAMETER = 10;
         public static final int ROBOT_HEAD_X_OFFSET = 10;
         public static final int ROBOT_HEAD_DIAMETER = 5;
-        public static final int TARGET_DIAMETER = 5;
-        public static final int TARGET_THETA = 0;
-        public static final int TARGET_ANCHORX = 0;
-        public static final int TARGET_ANCHORY = 0;
-        public static final int TARGET_INITIAL_X_COORDINATE = 150;
-        public static final int TARGET_INITIAL_Y_COORDINATE = 100;
     }
 
     class LoggerConstants {
         public static final int LOGGER_IQUEUE_LENGTH = 100;
     }
 
-    class KeyEventListenerConstants {
-        public static final double TARGET_VELOCITY = 0.1;
+    class TargetConstants {
+        public static final double TARGET_DEFAULT_VELOCITY = 0.1;
+        public static final int TARGET_HASTE_EFFECT_TAKE_DISTANCE = 9;
+        public static final int TARGET_INITIAL_Y_COORDINATE = 100;
+        public static final int TARGET_INITIAL_X_COORDINATE = 150;
+        public static final int TARGET_ANCHORY = 0;
+        public static final int TARGET_ANCHORX = 0;
+        public static final int TARGET_THETA = 0;
+        public static final int TARGET_DIAMETER = 5;
+    }
+
+    class HasteEffectConstants {
+        public static final double HASTE_EFFECT_MULTIPLIER = 2;
+        public static final int HASTE_EFFECT_ANCHORX = 0;
+        public static final int HASTE_EFFECT_THETA = 0;
+        public static final int HASTE_EFFECT_ANCHORY = 0;
+        public static final int HASTE_EFFECT_DIAMETER = 10;
     }
 }

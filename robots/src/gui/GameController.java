@@ -6,12 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static gui.Constants.GameVisualizerConstants.*;
-import static gui.Constants.MainApplicationFrameConstants.ROBOT_START_MOVING;
-import static gui.Constants.MainApplicationFrameConstants.ROBOT_STOP_MOVING;
+import static gui.Constants.HasteEffectConstants.HASTE_EFFECT_DIAMETER;
+import static gui.Constants.MainApplicationFrameConstants.*;
+import static gui.Constants.TargetConstants.TARGET_DIAMETER;
 
 /**
  * Controller class of the MVC model. This class reacts to user's actions.
@@ -20,12 +22,18 @@ public class GameController extends JPanel {
 
     private final Robot robot;
     private final Target target;
+    private final HasteEffect hasteEffect;
+    private final GameWindow gameWindow;
+    private final Random rand = new Random();
+    private final Timer timer;
 
-    public GameController(Robot robot, Target target) {
+    public GameController(Robot robot, Target target, GameWindow gameWindow) {
+        this.gameWindow = gameWindow;
         this.robot = robot;
         this.target = target;
+        this.hasteEffect = new HasteEffect(rand.nextInt(INITIAL_GAME_WINDOW_WIDTH), rand.nextInt(INITIAL_GAME_WINDOW_HEIGHT));
         robot.setMoving(false);
-        java.util.Timer timer = new Timer(TIMER_NAME, true);
+        timer = new Timer(TIMER_NAME, true);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -57,10 +65,24 @@ public class GameController extends JPanel {
     }
 
     private void onModelUpdateEvent() {
-        double distance = MathModule.calculateDistance(target.getXCoordinate(), target.getYCoordinate(), robot.getXCoordinate(), robot.getYCoordinate());
+        double robotToTargetDistance = MathModule.calculateDistance(target.getXCoordinate(), target.getYCoordinate(), robot.getXCoordinate(), robot.getYCoordinate());
+        double targetToHastEffectDistance = MathModule.calculateDistance(target.getXCoordinate(), target.getYCoordinate(), hasteEffect.getXCoordinate(), hasteEffect.getYCoordinate());
         target.move();
 
-        if (distance < ROBOT_STOP_DISTANCE) {
+        if (targetToHastEffectDistance < TARGET_DIAMETER + HASTE_EFFECT_DIAMETER) {
+            target.applyEffect(hasteEffect);
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    target.removeEffect(hasteEffect);
+                }
+            }, 30000L);
+            Dimension windowSize = gameWindow.getSize();
+            hasteEffect.setXCoordinate(rand.nextInt(MathModule.round(windowSize.getWidth())));
+            hasteEffect.setYCoordinate(rand.nextInt(MathModule.round(windowSize.getHeight())));
+        }
+
+        if (robotToTargetDistance < ROBOT_STOP_DISTANCE) {
             logRobotState(true);
             return;
         }
@@ -95,5 +117,6 @@ public class GameController extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         robot.draw(g2d);
         target.draw(g2d);
+        hasteEffect.draw(g2d);
     }
 }

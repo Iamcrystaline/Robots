@@ -4,40 +4,30 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 
 import static gui.Constants.GameVisualizerConstants.*;
-import static gui.Constants.GameVisualizerConstants.TARGET_DIAMETER;
+import static gui.Constants.TargetConstants.*;
 
-public class Target extends GameModel implements Moveable {
+public class Target extends MoveableGameModel {
 
-    private volatile double horizontalVelocity;
-    private volatile double verticalVelocity;
+    private int horizontalMoveMode;
+    private int verticalMoveMode;
 
-    public double getHorizontalVelocity() {
-        return horizontalVelocity;
+    public void setHorizontalMoveMode(int horizontalMoveMode) {
+        this.horizontalMoveMode = horizontalMoveMode;
     }
 
-    public void setHorizontalVelocity(double horizontalVelocity) {
-        this.horizontalVelocity = horizontalVelocity;
+    public void setVerticalMoveMode(int verticalMoveMode) {
+        this.verticalMoveMode = verticalMoveMode;
     }
 
-    public double getVerticalVelocity() {
-        return verticalVelocity;
-    }
-
-    public void setVerticalVelocity(double verticalVelocity) {
-        this.verticalVelocity = verticalVelocity;
-    }
-
-    public Target(double xCoordinate, double yCoordinate) {
-        super(xCoordinate, yCoordinate);
-        this.horizontalVelocity = 0;
-        this.verticalVelocity = 0;
+    public Target(double xCoordinate, double yCoordinate, double currentVelocity) {
+        super(xCoordinate, yCoordinate, currentVelocity, TARGET_DEFAULT_VELOCITY);
     }
 
     @Override
     public void draw(Graphics2D g) {
         AffineTransform t = AffineTransform.getRotateInstance(TARGET_THETA, TARGET_ANCHORX, TARGET_ANCHORY);
         g.setTransform(t);
-        g.setColor(Color.GREEN);
+        g.setColor(Color.YELLOW);
         int targetCenterX = MathModule.round(getXCoordinate());
         int targetCenterY = MathModule.round(getYCoordinate());
         GameVisualizer.fillOval(g, targetCenterX, targetCenterY, TARGET_DIAMETER, TARGET_DIAMETER);
@@ -47,9 +37,10 @@ public class Target extends GameModel implements Moveable {
 
     @Override
     public void move() {
-        double newTargetXCoordinate = getXCoordinate() + getHorizontalVelocity() * TIMER_UPDATE_PERIOD;
-        double newTargetYCoordinate = getYCoordinate() + getVerticalVelocity() * TIMER_UPDATE_PERIOD;
+        applyEffects();
+        double newTargetXCoordinate = getXCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * horizontalMoveMode;
         setXCoordinate(newTargetXCoordinate);
+        double newTargetYCoordinate = getYCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * verticalMoveMode;
         setYCoordinate(newTargetYCoordinate);
     }
 }

@@ -10,6 +10,9 @@ import log.Logger;
 
 import static gui.Constants.GameVisualizerConstants.*;
 import static gui.Constants.MainApplicationFrameConstants.*;
+import static gui.Constants.TargetConstants.TARGET_DEFAULT_VELOCITY;
+import static gui.Constants.TargetConstants.TARGET_INITIAL_X_COORDINATE;
+import static gui.Constants.TargetConstants.TARGET_INITIAL_Y_COORDINATE;
 
 public class MainApplicationFrame extends JFrame {
     private final JDesktopPane desktopPane = new JDesktopPane();
@@ -21,8 +24,8 @@ public class MainApplicationFrame extends JFrame {
                 screenSize.height - SCREEN_OFFSET * 2);
 
         setContentPane(desktopPane);
-        Robot robot = new Robot(ROBOT_INITIAL_X_COORDINATE, ROBOT_INITIAL_Y_COORDINATE, ROBOT_INITIAL_DIRECTION);
-        Target target = new Target(TARGET_INITIAL_X_COORDINATE, TARGET_INITIAL_Y_COORDINATE);
+        Robot robot = new Robot(ROBOT_INITIAL_X_COORDINATE, ROBOT_INITIAL_Y_COORDINATE, ROBOT_DEFAULT_VELOCITY, ROBOT_INITIAL_DIRECTION);
+        Target target = new Target(TARGET_INITIAL_X_COORDINATE, TARGET_INITIAL_Y_COORDINATE, TARGET_DEFAULT_VELOCITY);
 
         LogWindow logWindow = createLogWindow();
         addWindow(logWindow);

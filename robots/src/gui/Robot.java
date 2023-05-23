@@ -2,12 +2,11 @@ package gui;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
 
 import static gui.Constants.GameVisualizerConstants.*;
 import static gui.Constants.GameVisualizerConstants.ROBOT_HEAD_DIAMETER;
 
-public class Robot extends GameModel implements Moveable {
+public class Robot extends MoveableGameModel {
 
     private volatile double direction;
     private double angularVelocity;
@@ -37,8 +36,8 @@ public class Robot extends GameModel implements Moveable {
         return direction;
     }
 
-    public Robot(double xCoordinate, double yCoordinate, double direction) {
-        super(xCoordinate, yCoordinate);
+    public Robot(double xCoordinate, double yCoordinate, double currentVelocity, double direction) {
+        super(xCoordinate, yCoordinate, currentVelocity, ROBOT_DEFAULT_VELOCITY);
         this.direction = direction;
     }
 
@@ -61,8 +60,8 @@ public class Robot extends GameModel implements Moveable {
     @Override
     public void move() {
         double newRobotDirection = getDirection() + getAngularVelocity() * TIMER_UPDATE_PERIOD;
-        double newRobotXCoordinate = getXCoordinate() + ROBOT_VELOCITY * TIMER_UPDATE_PERIOD * Math.cos(getDirection());
-        double newRobotYCoordinate = getYCoordinate() + ROBOT_VELOCITY * TIMER_UPDATE_PERIOD * Math.sin(getDirection());
+        double newRobotXCoordinate = getXCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * Math.cos(newRobotDirection);
+        double newRobotYCoordinate = getYCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * Math.sin(newRobotDirection);
         setXCoordinate(newRobotXCoordinate);
         setYCoordinate(newRobotYCoordinate);
         setDirection(MathModule.asNormalizedRadians(newRobotDirection));
