@@ -8,8 +8,8 @@ import javax.swing.*;
 
 import log.Logger;
 
-import static gui.Constants.GameVisualizerConstants.*;
 import static gui.Constants.MainApplicationFrameConstants.*;
+import static gui.Constants.RobotConstants.*;
 import static gui.Constants.TargetConstants.TARGET_DEFAULT_VELOCITY;
 import static gui.Constants.TargetConstants.TARGET_INITIAL_X_COORDINATE;
 import static gui.Constants.TargetConstants.TARGET_INITIAL_Y_COORDINATE;

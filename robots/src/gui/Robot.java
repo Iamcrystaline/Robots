@@ -3,8 +3,9 @@ package gui;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-import static gui.Constants.GameVisualizerConstants.*;
-import static gui.Constants.GameVisualizerConstants.ROBOT_HEAD_DIAMETER;
+import static gui.Constants.RobotConstants.*;
+import static gui.Constants.TimerConstants.TIMER_UPDATE_PERIOD;
+
 
 public class Robot extends MoveableGameModel {
 
@@ -59,6 +60,7 @@ public class Robot extends MoveableGameModel {
 
     @Override
     public void move() {
+        applyEffects();
         double newRobotDirection = getDirection() + getAngularVelocity() * TIMER_UPDATE_PERIOD;
         double newRobotXCoordinate = getXCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * Math.cos(newRobotDirection);
         double newRobotYCoordinate = getYCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * Math.sin(newRobotDirection);

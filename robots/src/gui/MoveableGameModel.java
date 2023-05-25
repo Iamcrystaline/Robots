@@ -28,7 +28,9 @@ public abstract class MoveableGameModel extends GameModel {
     }
 
     public void applyEffect(VelocityEffect velocityEffect) {
-        velocityEffects.add(velocityEffect);
+        if (!velocityEffects.contains(velocityEffect)) {
+            velocityEffects.add(velocityEffect);
+        }
     }
 
     public void removeEffect(VelocityEffect velocityEffect) {
@@ -45,6 +47,7 @@ public abstract class MoveableGameModel extends GameModel {
      * Describes how to calculate coordinates for object
      */
     public abstract void move();
+
     public void applyEffects() {
         setCurrentVelocity(velocityConstant);
         for (VelocityEffect velocityEffect : velocityEffects) {

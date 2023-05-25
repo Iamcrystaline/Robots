@@ -3,8 +3,8 @@ package gui;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-import static gui.Constants.GameVisualizerConstants.*;
 import static gui.Constants.TargetConstants.*;
+import static gui.Constants.TimerConstants.TIMER_UPDATE_PERIOD;
 
 public class Target extends MoveableGameModel {
 
