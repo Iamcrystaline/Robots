@@ -5,6 +5,10 @@ import java.awt.geom.AffineTransform;
 
 import static gui.Constants.HasteEffectConstants.*;
 
+/**
+ * The class responsible for the accelerated effect
+ */
+
 public class HasteEffect extends VelocityEffect {
 
     public HasteEffect(double XCoordinate, double YCoordinate) {

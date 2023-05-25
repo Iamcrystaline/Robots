@@ -1,5 +1,8 @@
 package gui;
 
+/**
+ * Interface for accelerating and decelerating effects
+ */
 public abstract class VelocityEffect extends GameModel {
 
 
