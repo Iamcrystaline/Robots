@@ -10,6 +10,15 @@ public class Target extends MoveableGameModel {
 
     private HorizontalMoveModes horizontalMoveMode;
     private VerticalMoveModes verticalMoveMode;
+    private boolean isShielded;
+
+    public boolean isShielded() {
+        return isShielded;
+    }
+
+    public void setShielded(boolean shielded) {
+        isShielded = shielded;
+    }
 
     public void setHorizontalMoveMode(HorizontalMoveModes horizontalMoveMode) {
         this.horizontalMoveMode = horizontalMoveMode;
@@ -23,6 +32,7 @@ public class Target extends MoveableGameModel {
         super(xCoordinate, yCoordinate, currentVelocity, TARGET_DEFAULT_VELOCITY, TARGET_DIAMETER);
         this.horizontalMoveMode = HorizontalMoveModes.STOP;
         this.verticalMoveMode = VerticalMoveModes.STOP;
+        this.isShielded = false;
     }
 
     @Override
@@ -35,6 +45,10 @@ public class Target extends MoveableGameModel {
         GameVisualizer.fillOval(g, targetCenterX, targetCenterY, TARGET_DIAMETER, TARGET_DIAMETER);
         g.setColor(Color.BLACK);
         GameVisualizer.drawOval(g, targetCenterX, targetCenterY, TARGET_DIAMETER, TARGET_DIAMETER);
+        if (isShielded) {
+            g.setColor(Color.BLUE);
+            GameVisualizer.drawOval(g, targetCenterX, targetCenterY, TARGET_DIAMETER + 5, TARGET_DIAMETER + 5);
+        }
     }
 
     @Override

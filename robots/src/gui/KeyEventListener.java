@@ -1,6 +1,7 @@
 package gui;
 
 import gui.abilities.FreezeTimeAbility;
+import gui.abilities.ShieldAbility;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -12,10 +13,12 @@ public class KeyEventListener extends KeyAdapter {
 
     private final Target target;
     private final FreezeTimeAbility freezeTimeAbility;
+    private final ShieldAbility shieldAbility;
 
-    public KeyEventListener(Target target, FreezeTimeAbility freezeTimeAbility) {
+    public KeyEventListener(Target target, FreezeTimeAbility freezeTimeAbility, ShieldAbility shieldAbility) {
         this.target = target;
         this.freezeTimeAbility = freezeTimeAbility;
+        this.shieldAbility = shieldAbility;
     }
 
     @Override
@@ -34,6 +37,10 @@ public class KeyEventListener extends KeyAdapter {
         switch (keyCode) {
             case KeyEvent.VK_1: {
                 freezeTimeAbility.use();
+                break;
+            }
+            case KeyEvent.VK_2: {
+                shieldAbility.use();
                 break;
             }
             case KeyEvent.VK_DOWN: {

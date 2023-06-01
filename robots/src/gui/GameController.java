@@ -1,6 +1,7 @@
 package gui;
 
 import gui.abilities.FreezeTimeAbility;
+import gui.abilities.ShieldAbility;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,7 @@ import java.util.Timer;
 
 import static gui.Constants.MainApplicationFrameConstants.*;
 import static gui.Constants.RobotConstants.*;
+import static gui.Constants.ShieldAbilityConstants.SHIELD_ABILITY_STUN_DURATION;
 import static gui.Constants.TimerConstants.*;
 
 /**
@@ -26,6 +28,7 @@ public class GameController extends JPanel {
     private final Target target;
     private final GameWindow gameWindow;
     private final Random rand = new Random();
+    private final Timer timer;
 
     public GameController(Robot initialRobot, Target target, GameWindow gameWindow) {
         this.gameWindow = gameWindow;
@@ -40,7 +43,7 @@ public class GameController extends JPanel {
         this.gameEffects = new HashMap<>();
         this.gameEffects.put(hasteEffect, hasteEffect);
         this.gameEffects.put(slowEffect, slowEffect);
-        Timer timer = new Timer(TIMER_NAME, true);
+        timer = new Timer(TIMER_NAME, true);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -70,7 +73,7 @@ public class GameController extends JPanel {
         }, ROBOT_VELOCITY_INCREASE_PERIOD, ROBOT_VELOCITY_INCREASE_PERIOD);
         this.setFocusable(true);
         this.requestFocus();
-        addKeyListener(new KeyEventListener(target, new FreezeTimeAbility(robots)));
+        addKeyListener(new KeyEventListener(target, new FreezeTimeAbility(robots), new ShieldAbility(target)));
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent event) {
@@ -114,7 +117,18 @@ public class GameController extends JPanel {
 
         for (Robot robot : robots) {
             if (MathModule.calculateDistance(robot.getXCoordinate(), robot.getYCoordinate(), target.getXCoordinate(), target.getYCoordinate()) < ROBOT_STOP_DISTANCE) {
-                return;
+                if (target.isShielded()) {
+                    robot.setFrozen(true);
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            robot.setFrozen(false);
+                        }
+                    }, SHIELD_ABILITY_STUN_DURATION);
+                    target.setShielded(false);
+                } else {
+                    return;
+                }
             }
             double angleToTarget = MathModule.calculateAngle(robot.getXCoordinate(), robot.getYCoordinate(), target.getXCoordinate(), target.getYCoordinate());
             if (angleToTarget == robot.getDirection()) {

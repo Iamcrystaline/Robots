@@ -116,4 +116,10 @@ public interface Constants {
         public static final long FREEZE_TIME_ABILITY_COOLDOWN = 30000L;
         public static final long FREEZE_TIME_ABILITY_DURATION = 5000L;
     }
+
+    class ShieldAbilityConstants {
+        public static final long SHIELD_ABILITY_COOLDOWN = 30000L;
+        public static final long SHIELD_ABILITY_DURATION = 5000L;
+        public static final long SHIELD_ABILITY_STUN_DURATION = 3000L;
+    }
 }
