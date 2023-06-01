@@ -7,6 +7,8 @@ public interface Constants {
         public static final int SCREEN_OFFSET = 50;
         public static final int INITIAL_GAME_WINDOW_HEIGHT = 400;
         public static final int INITIAL_GAME_WINDOW_WIDTH = 400;
+        public static final int INTERNAL_GAME_WINDOW_WIDTH = 388;
+        public static final int INTERNAL_GAME_WINDOW_HEIGHT= 369;
         public static final int LOG_WINDOW_INITIAL_LOCATION_X = 10;
         public static final int LOG_WINDOW_INITIAL_LOCATION_Y = 10;
         public static final int LOG_WINDOW_INITIAL_WIDTH = 300;
@@ -47,15 +49,17 @@ public interface Constants {
         public static final String GAME_WINDOW_TITLE = "Игровое поле";
     }
 
-    class GameVisualizerConstants {
-
-        public static final double ROBOT_VELOCITY = 0.1;
-        public static final double MAX_ANGULAR_VELOCITY = 0.001;
-        public static final double ROBOT_STOP_DISTANCE = 0.5;
+    class TimerConstants {
         public static final String TIMER_NAME = "events generator";
-        public static final int TIMER_DELAY = 0;
+        public static final int TIMER_DELAY = 10;
         public static final int TIMER_REDRAW_PERIOD = 50;
         public static final int TIMER_UPDATE_PERIOD = 10;
+
+    }
+
+    class RobotConstants {
+        public static final double MIN_ROBOT_SPAWN_DISTANCE = 200;
+        public static final long ROBOT_SPAWN_PERIOD = 30000L;
         public static final int ROBOT_INITIAL_X_COORDINATE = 100;
         public static final int ROBOT_INITIAL_Y_COORDINATE = 100;
         public static final int ROBOT_INITIAL_DIRECTION = 0;
@@ -63,19 +67,44 @@ public interface Constants {
         public static final int ROBOT_BODY_SECOND_DIAMETER = 10;
         public static final int ROBOT_HEAD_X_OFFSET = 10;
         public static final int ROBOT_HEAD_DIAMETER = 5;
-        public static final int TARGET_DIAMETER = 5;
-        public static final int TARGET_THETA = 0;
-        public static final int TARGET_ANCHORX = 0;
-        public static final int TARGET_ANCHORY = 0;
-        public static final int TARGET_INITIAL_X_COORDINATE = 150;
-        public static final int TARGET_INITIAL_Y_COORDINATE = 100;
+        public static final double ROBOT_DEFAULT_VELOCITY = 0.1;
+        public static final double ROBOT_ANGULAR_VELOCITY = 0.005;
+        public static final double ROBOT_STOP_DISTANCE = 0.5;
     }
 
     class LoggerConstants {
         public static final int LOGGER_IQUEUE_LENGTH = 100;
     }
 
-    class KeyEventListenerConstants {
-        public static final double TARGET_VELOCITY = 0.1;
+    class TargetConstants {
+        public static final double TARGET_DEFAULT_VELOCITY = 0.1;
+        public static final int TARGET_INITIAL_Y_COORDINATE = 100;
+        public static final int TARGET_INITIAL_X_COORDINATE = 150;
+        public static final int TARGET_ANCHORY = 0;
+        public static final int TARGET_ANCHORX = 0;
+        public static final int TARGET_THETA = 0;
+        public static final int TARGET_DIAMETER = 5;
+    }
+
+    class VelocityEffectConstants {
+        public static final String EFFECT_TIMER_NAME = "Effect timer";
+    }
+
+    class HasteEffectConstants {
+        public static final double HASTE_EFFECT_MULTIPLIER = 2;
+        public static final int HASTE_EFFECT_ANCHORX = 0;
+        public static final int HASTE_EFFECT_THETA = 0;
+        public static final int HASTE_EFFECT_ANCHORY = 0;
+        public static final int HASTE_EFFECT_DIAMETER = 10;
+        public static final long HASTE_EFFECT_DURATION = 30000L;
+    }
+
+    class SlowEffectConstants {
+        public static final double SLOW_EFFECT_MULTIPLIER = 1.0 / 2;
+        public static final int SLOW_EFFECT_ANCHORX = 0;
+        public static final int SLOW_EFFECT_THETA = 0;
+        public static final int SLOW_EFFECT_ANCHORY = 0;
+        public static final int SLOW_EFFECT_DIAMETER = 10;
+        public static final long SLOW_EFFECT_DURATION = 30000L;
     }
 }
