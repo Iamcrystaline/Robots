@@ -50,6 +50,7 @@ public interface Constants {
     }
 
     class TimerConstants {
+        public static final String FREEZE_TIME_TIMER_NAME = "Freeze time timer";
         public static final String TIMER_NAME = "events generator";
         public static final int TIMER_DELAY = 10;
         public static final int TIMER_REDRAW_PERIOD = 50;
@@ -58,6 +59,9 @@ public interface Constants {
     }
 
     class RobotConstants {
+        public static final double ROBOT_VELOCITY_MULTIPLIER = 1.2;
+        public static final double ROBOT_ANGULAR_VELOCITY_MULTIPLIER = 1.2;
+        public static final long ROBOT_VELOCITY_INCREASE_PERIOD = 30000L;
         public static final double MIN_ROBOT_SPAWN_DISTANCE = 200;
         public static final long ROBOT_SPAWN_PERIOD = 30000L;
         public static final int ROBOT_INITIAL_X_COORDINATE = 100;
@@ -106,5 +110,10 @@ public interface Constants {
         public static final int SLOW_EFFECT_ANCHORY = 0;
         public static final int SLOW_EFFECT_DIAMETER = 10;
         public static final long SLOW_EFFECT_DURATION = 30000L;
+    }
+
+    class FreezeTimeAbilityConstants {
+        public static final long FREEZE_TIME_ABILITY_COOLDOWN = 30000L;
+        public static final long FREEZE_TIME_ABILITY_DURATION = 5000L;
     }
 }

@@ -8,17 +8,25 @@ import static gui.Constants.TimerConstants.TIMER_UPDATE_PERIOD;
 
 
 public class Robot extends MoveableGameModel {
-
     private volatile double direction;
+    private double angularVelocityConstant;
     private double angularVelocity;
-    private boolean isMoving;
+    private boolean isFrozen;
 
-    public boolean isMoving() {
-        return isMoving;
+    public boolean isFrozen() {
+        return isFrozen;
     }
 
-    public void setMoving(boolean moving) {
-        isMoving = moving;
+    public void setFrozen(boolean frozen) {
+        isFrozen = frozen;
+    }
+
+    public double getAngularVelocityConstant() {
+        return angularVelocityConstant;
+    }
+
+    public void setAngularVelocityConstant(double angularVelocityConstant) {
+        this.angularVelocityConstant = angularVelocityConstant;
     }
 
     public double getAngularVelocity() {
@@ -37,9 +45,11 @@ public class Robot extends MoveableGameModel {
         return direction;
     }
 
-    public Robot(double xCoordinate, double yCoordinate, double currentVelocity, double direction) {
+    public Robot(double xCoordinate, double yCoordinate, double currentVelocity, double direction, double angularVelocityConstant) {
         super(xCoordinate, yCoordinate, currentVelocity, ROBOT_DEFAULT_VELOCITY, ROBOT_BODY_SECOND_DIAMETER);
+        this.angularVelocityConstant = angularVelocityConstant;
         this.direction = direction;
+        this.isFrozen = false;
     }
 
     @Override
@@ -60,14 +70,15 @@ public class Robot extends MoveableGameModel {
 
     @Override
     public void move() {
-        applyEffects();
-        double newRobotDirection = getDirection() + getAngularVelocity() * TIMER_UPDATE_PERIOD;
-        double newRobotXCoordinate = getXCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * Math.cos(newRobotDirection);
-        double newRobotYCoordinate = getYCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * Math.sin(newRobotDirection);
-        setXCoordinate(newRobotXCoordinate);
-        setYCoordinate(newRobotYCoordinate);
-        setDirection(MathModule.asNormalizedRadians(newRobotDirection));
-
+        if (!isFrozen) {
+            applyEffects();
+            double newRobotDirection = getDirection() + getAngularVelocity() * TIMER_UPDATE_PERIOD;
+            double newRobotXCoordinate = getXCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * Math.cos(newRobotDirection);
+            double newRobotYCoordinate = getYCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * Math.sin(newRobotDirection);
+            setXCoordinate(newRobotXCoordinate);
+            setYCoordinate(newRobotYCoordinate);
+            setDirection(MathModule.asNormalizedRadians(newRobotDirection));
+        }
     }
 
 }

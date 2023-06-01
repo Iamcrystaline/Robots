@@ -24,7 +24,7 @@ public class MainApplicationFrame extends JFrame {
                 screenSize.height - SCREEN_OFFSET * 2);
 
         setContentPane(desktopPane);
-        Robot robot = new Robot(ROBOT_INITIAL_X_COORDINATE, ROBOT_INITIAL_Y_COORDINATE, ROBOT_DEFAULT_VELOCITY, ROBOT_INITIAL_DIRECTION);
+        Robot robot = new Robot(ROBOT_INITIAL_X_COORDINATE, ROBOT_INITIAL_Y_COORDINATE, ROBOT_DEFAULT_VELOCITY, ROBOT_INITIAL_DIRECTION, ROBOT_ANGULAR_VELOCITY);
         Target target = new Target(TARGET_INITIAL_X_COORDINATE, TARGET_INITIAL_Y_COORDINATE, TARGET_DEFAULT_VELOCITY);
 
         LogWindow logWindow = createLogWindow();

@@ -1,5 +1,7 @@
 package gui;
 
+import gui.abilities.FreezeTimeAbility;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -25,21 +27,19 @@ public class GameController extends JPanel {
     private final GameWindow gameWindow;
     private final Random rand = new Random();
 
-    public GameController(Robot robot, Target target, GameWindow gameWindow) {
+    public GameController(Robot initialRobot, Target target, GameWindow gameWindow) {
         this.gameWindow = gameWindow;
         this.robots = new ArrayList<>();
-        this.robots.add(robot);
+        this.robots.add(initialRobot);
         this.target = target;
         this.gameModels = new ArrayList<>();
-        this.gameModels.add(robot);
+        this.gameModels.add(initialRobot);
         this.gameModels.add(target);
         HasteEffect hasteEffect = new HasteEffect(rand.nextInt(INTERNAL_GAME_WINDOW_WIDTH), rand.nextInt(INTERNAL_GAME_WINDOW_HEIGHT));
         SlowEffect slowEffect = new SlowEffect(rand.nextInt(INITIAL_GAME_WINDOW_WIDTH), rand.nextInt(INITIAL_GAME_WINDOW_HEIGHT));
         this.gameEffects = new HashMap<>();
         this.gameEffects.put(hasteEffect, hasteEffect);
         this.gameEffects.put(slowEffect, slowEffect);
-
-        robot.setMoving(false);
         Timer timer = new Timer(TIMER_NAME, true);
         timer.schedule(new TimerTask() {
             @Override
@@ -59,9 +59,18 @@ public class GameController extends JPanel {
                 addNewRobot();
             }
         }, ROBOT_SPAWN_PERIOD, ROBOT_SPAWN_PERIOD);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                robots.forEach(robot -> {
+                    robot.setVelocityConstant(robot.getVelocityConstant() * ROBOT_VELOCITY_MULTIPLIER);
+                    robot.setAngularVelocityConstant(robot.getAngularVelocityConstant() * ROBOT_ANGULAR_VELOCITY_MULTIPLIER);
+                });
+            }
+        }, ROBOT_VELOCITY_INCREASE_PERIOD, ROBOT_VELOCITY_INCREASE_PERIOD);
         this.setFocusable(true);
         this.requestFocus();
-        addKeyListener(new KeyEventListener(target));
+        addKeyListener(new KeyEventListener(target, new FreezeTimeAbility(robots)));
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent event) {
@@ -88,7 +97,8 @@ public class GameController extends JPanel {
                 randomXCoordinate,
                 randomYCoordinate,
                 ROBOT_DEFAULT_VELOCITY,
-                ROBOT_INITIAL_DIRECTION
+                ROBOT_INITIAL_DIRECTION,
+                ROBOT_ANGULAR_VELOCITY
         );
         this.robots.add(newRobot);
         this.gameModels.add(newRobot);
@@ -110,9 +120,9 @@ public class GameController extends JPanel {
             if (angleToTarget == robot.getDirection()) {
                 robot.setAngularVelocity(0);
             } else if (angleToTarget <= Math.PI) {
-                robot.setAngularVelocity(angleToTarget > robot.getDirection() || robot.getDirection() > angleToTarget + Math.PI ? ROBOT_ANGULAR_VELOCITY : -ROBOT_ANGULAR_VELOCITY);
+                robot.setAngularVelocity(angleToTarget > robot.getDirection() || robot.getDirection() > angleToTarget + Math.PI ? robot.getAngularVelocityConstant() : -robot.getAngularVelocityConstant());
             } else {
-                robot.setAngularVelocity(angleToTarget > robot.getDirection() && robot.getDirection() > angleToTarget - Math.PI ? ROBOT_ANGULAR_VELOCITY : -ROBOT_ANGULAR_VELOCITY);
+                robot.setAngularVelocity(angleToTarget > robot.getDirection() && robot.getDirection() > angleToTarget - Math.PI ? robot.getAngularVelocityConstant() : -robot.getAngularVelocityConstant());
             }
             robot.move();
         }

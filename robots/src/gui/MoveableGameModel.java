@@ -11,9 +11,17 @@ import java.util.Set;
 public abstract class MoveableGameModel extends GameModel {
 
     private volatile double currentVelocity;
-    private final double velocityConstant;
+    private double velocityConstant;
     // Used map instead of Set here cause Set doesn't have get() and add with replacing methods
     private final Map<VelocityEffect, VelocityEffect> velocityEffects = new HashMap<>();
+
+    public double getVelocityConstant() {
+        return velocityConstant;
+    }
+
+    public void setVelocityConstant(double velocityConstant) {
+        this.velocityConstant = velocityConstant;
+    }
 
     public double getCurrentVelocity() {
         return currentVelocity;

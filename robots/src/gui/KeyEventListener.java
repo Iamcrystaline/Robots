@@ -1,5 +1,7 @@
 package gui;
 
+import gui.abilities.FreezeTimeAbility;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -9,9 +11,11 @@ import java.awt.event.KeyEvent;
 public class KeyEventListener extends KeyAdapter {
 
     private final Target target;
+    private final FreezeTimeAbility freezeTimeAbility;
 
-    public KeyEventListener(Target target) {
+    public KeyEventListener(Target target, FreezeTimeAbility freezeTimeAbility) {
         this.target = target;
+        this.freezeTimeAbility = freezeTimeAbility;
     }
 
     @Override
@@ -20,7 +24,7 @@ public class KeyEventListener extends KeyAdapter {
     }
 
     /**
-     * Depends on the user's action, changes the target's velocity.
+     * Depends on the user's action do something.
      *
      * @param e - pressed key
      */
@@ -28,6 +32,10 @@ public class KeyEventListener extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
+            case KeyEvent.VK_1: {
+                freezeTimeAbility.use();
+                break;
+            }
             case KeyEvent.VK_DOWN: {
                 target.setVerticalMoveMode(VerticalMoveModes.DOWN);
                 break;
