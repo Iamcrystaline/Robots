@@ -1,5 +1,8 @@
 package gui;
 
+/**
+ * Enum class for Target's horizontal move modes
+ */
 public enum HorizontalMoveModes {
 
     RIGHT(1),

@@ -1,5 +1,8 @@
 package gui;
 
+/**
+ * Enum class for Target's vertical move modes
+ */
 public enum VerticalMoveModes {
 
     DOWN(1),

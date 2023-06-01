@@ -12,6 +12,7 @@ public abstract class MoveableGameModel extends GameModel {
 
     private volatile double currentVelocity;
     private final double velocityConstant;
+    // Used map instead of Set here cause Set doesn't have get() and add with replacing methods
     private final Map<VelocityEffect, VelocityEffect> velocityEffects = new HashMap<>();
 
     public double getCurrentVelocity() {
@@ -24,14 +25,6 @@ public abstract class MoveableGameModel extends GameModel {
 
     public Map<VelocityEffect, VelocityEffect> getVelocityEffects() {
         return velocityEffects;
-    }
-
-    public double getVelocityConstant() {
-        return velocityConstant;
-    }
-
-    public void applyEffect(VelocityEffect velocityEffect) {
-        velocityEffects.put(velocityEffect, velocityEffect);
     }
 
     public void removeEffect(VelocityEffect velocityEffect) {
@@ -50,7 +43,7 @@ public abstract class MoveableGameModel extends GameModel {
     public abstract void move();
 
     /**
-     * Method that adds a list of effects to the object
+     * Apply effects to the current velocity
      */
     public void applyEffects() {
         setCurrentVelocity(velocityConstant);

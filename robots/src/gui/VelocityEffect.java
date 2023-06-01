@@ -36,6 +36,10 @@ public abstract class VelocityEffect extends GameModel {
         this.velocityMultiplier = velocityMultiplier;
     }
 
+    /**
+     * Apply effect to the model and set timer for removing effect
+     * @param model - model to apply effect
+     */
     public void apply(MoveableGameModel model) {
         this.appliedModel = model;
         VelocityEffect velocityEffect = this;
@@ -55,5 +59,9 @@ public abstract class VelocityEffect extends GameModel {
         return velocityMultiplier;
     }
 
+    /**
+     * Method to get new instance of object to place it on the game field
+     * @return - new instance
+     */
     public abstract VelocityEffect getNewInstance();
 }

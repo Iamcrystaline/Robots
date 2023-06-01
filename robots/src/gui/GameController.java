@@ -19,6 +19,7 @@ public class GameController extends JPanel {
 
     private final List<Robot> robots;
     private final List<MoveableGameModel> gameModels;
+    // Used map instead of Set here cause Set doesn't have get() and add with replacing methods
     private final Map<VelocityEffect, VelocityEffect> gameEffects;
     private final Target target;
     private final GameWindow gameWindow;
@@ -72,6 +73,9 @@ public class GameController extends JPanel {
         setDoubleBuffered(true);
     }
 
+    /**
+     * Method to add new robot on the game field
+     */
     private void addNewRobot() {
         Dimension windowSize = gameWindow.getContentPane().getSize();
         int randomXCoordinate = rand.nextInt(MathModule.round(windowSize.getWidth()));
@@ -114,6 +118,9 @@ public class GameController extends JPanel {
         }
     }
 
+    /**
+     * Method to check all distances between gameModels and gameEffects. If they are close enough, apply the effect to the model
+     */
     private void checkAndApplyEffects() {
         Dimension windowSize = gameWindow.getContentPane().getSize();
         for (MoveableGameModel model : gameModels) {
