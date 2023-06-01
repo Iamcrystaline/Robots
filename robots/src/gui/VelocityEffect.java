@@ -31,7 +31,7 @@ public abstract class VelocityEffect extends GameModel {
 
     public VelocityEffect(double XCoordinate, double YCoordinate, double hitBoxRadius, long duration, double velocityMultiplier) {
         super(XCoordinate, YCoordinate, hitBoxRadius);
-        this.timer = new Timer(EFFECT_TIMER_NAME, true);
+        this.timer = new Timer(EFFECT_TIMER_NAME, false);
         this.duration = duration;
         this.velocityMultiplier = velocityMultiplier;
     }

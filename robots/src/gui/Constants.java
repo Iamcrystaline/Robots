@@ -87,7 +87,6 @@ public interface Constants {
     }
 
     class VelocityEffectConstants {
-        public static final long EFFECT_DURATION = 30000L;
         public static final String EFFECT_TIMER_NAME = "Effect timer";
     }
 

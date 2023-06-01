@@ -123,10 +123,11 @@ public class GameController extends JPanel {
                     VelocityEffect previousEffect = model.getVelocityEffects().get(effect);
                     if (previousEffect != null) {
                         previousEffect.getTimer().cancel();
+                        previousEffect.getTimer().purge();
                     }
                     model.getVelocityEffects().put(effect, effect);
+                    effect.apply(model);
                     VelocityEffect newEffect = effect.getNewInstance();
-                    newEffect.apply(model);
                     newEffect.setXCoordinate(rand.nextInt(MathModule.round(windowSize.getWidth())));
                     newEffect.setYCoordinate(rand.nextInt(MathModule.round(windowSize.getHeight())));
                     gameEffects.put(newEffect, newEffect);
