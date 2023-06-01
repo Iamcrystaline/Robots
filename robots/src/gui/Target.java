@@ -8,19 +8,21 @@ import static gui.Constants.TimerConstants.TIMER_UPDATE_PERIOD;
 
 public class Target extends MoveableGameModel {
 
-    private int horizontalMoveMode;
-    private int verticalMoveMode;
+    private HorizontalMoveModes horizontalMoveMode;
+    private VerticalMoveModes verticalMoveMode;
 
-    public void setHorizontalMoveMode(int horizontalMoveMode) {
+    public void setHorizontalMoveMode(HorizontalMoveModes horizontalMoveMode) {
         this.horizontalMoveMode = horizontalMoveMode;
     }
 
-    public void setVerticalMoveMode(int verticalMoveMode) {
+    public void setVerticalMoveMode(VerticalMoveModes verticalMoveMode) {
         this.verticalMoveMode = verticalMoveMode;
     }
 
     public Target(double xCoordinate, double yCoordinate, double currentVelocity) {
-        super(xCoordinate, yCoordinate, currentVelocity, TARGET_DEFAULT_VELOCITY);
+        super(xCoordinate, yCoordinate, currentVelocity, TARGET_DEFAULT_VELOCITY, TARGET_DIAMETER);
+        this.horizontalMoveMode = HorizontalMoveModes.STOP;
+        this.verticalMoveMode = VerticalMoveModes.STOP;
     }
 
     @Override
@@ -38,9 +40,9 @@ public class Target extends MoveableGameModel {
     @Override
     public void move() {
         applyEffects();
-        double newTargetXCoordinate = getXCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * horizontalMoveMode;
+        double newTargetXCoordinate = getXCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * horizontalMoveMode.getMoveConstant();
         setXCoordinate(newTargetXCoordinate);
-        double newTargetYCoordinate = getYCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * verticalMoveMode;
+        double newTargetYCoordinate = getYCoordinate() + getCurrentVelocity() * TIMER_UPDATE_PERIOD * verticalMoveMode.getMoveConstant();
         setYCoordinate(newTargetYCoordinate);
     }
 }

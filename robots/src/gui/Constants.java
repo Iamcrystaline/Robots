@@ -51,13 +51,15 @@ public interface Constants {
 
     class TimerConstants {
         public static final String TIMER_NAME = "events generator";
-        public static final int TIMER_DELAY = 0;
+        public static final int TIMER_DELAY = 10;
         public static final int TIMER_REDRAW_PERIOD = 50;
         public static final int TIMER_UPDATE_PERIOD = 10;
 
     }
 
     class RobotConstants {
+        public static final double MIN_ROBOT_SPAWN_DISTANCE = 200;
+        public static final long ROBOT_SPAWN_PERIOD = 30000L;
         public static final int ROBOT_INITIAL_X_COORDINATE = 100;
         public static final int ROBOT_INITIAL_Y_COORDINATE = 100;
         public static final int ROBOT_INITIAL_DIRECTION = 0;
@@ -84,12 +86,18 @@ public interface Constants {
         public static final int TARGET_DIAMETER = 5;
     }
 
+    class VelocityEffectConstants {
+        public static final long EFFECT_DURATION = 30000L;
+        public static final String EFFECT_TIMER_NAME = "Effect timer";
+    }
+
     class HasteEffectConstants {
         public static final double HASTE_EFFECT_MULTIPLIER = 2;
         public static final int HASTE_EFFECT_ANCHORX = 0;
         public static final int HASTE_EFFECT_THETA = 0;
         public static final int HASTE_EFFECT_ANCHORY = 0;
         public static final int HASTE_EFFECT_DIAMETER = 10;
+        public static final long HASTE_EFFECT_DURATION = 30000L;
     }
 
     class SlowEffectConstants {
@@ -98,5 +106,6 @@ public interface Constants {
         public static final int SLOW_EFFECT_THETA = 0;
         public static final int SLOW_EFFECT_ANCHORY = 0;
         public static final int SLOW_EFFECT_DIAMETER = 10;
+        public static final long SLOW_EFFECT_DURATION = 30000L;
     }
 }

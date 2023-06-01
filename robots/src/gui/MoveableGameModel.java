@@ -1,7 +1,9 @@
 package gui;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Interface for moveable game objects
@@ -10,35 +12,34 @@ public abstract class MoveableGameModel extends GameModel {
 
     private volatile double currentVelocity;
     private final double velocityConstant;
+    private final Map<VelocityEffect, VelocityEffect> velocityEffects = new HashMap<>();
 
     public double getCurrentVelocity() {
         return currentVelocity;
     }
 
     public void setCurrentVelocity(double currentVelocity) {
-        if (currentVelocity <= velocityConstant * 2 && currentVelocity >= velocityConstant / 2) {
-            this.currentVelocity = currentVelocity;
-        }
+        this.currentVelocity = currentVelocity;
     }
 
-    private final List<VelocityEffect> velocityEffects = new ArrayList<>();
+    public Map<VelocityEffect, VelocityEffect> getVelocityEffects() {
+        return velocityEffects;
+    }
 
     public double getVelocityConstant() {
         return velocityConstant;
     }
 
     public void applyEffect(VelocityEffect velocityEffect) {
-        if (!velocityEffects.contains(velocityEffect)) {
-            velocityEffects.add(velocityEffect);
-        }
+        velocityEffects.put(velocityEffect, velocityEffect);
     }
 
     public void removeEffect(VelocityEffect velocityEffect) {
         velocityEffects.remove(velocityEffect);
     }
 
-    public MoveableGameModel(double XCoordinate, double YCoordinate, double currentVelocity, double velocityConstant) {
-        super(XCoordinate, YCoordinate);
+    public MoveableGameModel(double XCoordinate, double YCoordinate, double currentVelocity, double velocityConstant, double hitBoxRadius) {
+        super(XCoordinate, YCoordinate, hitBoxRadius);
         this.currentVelocity = currentVelocity;
         this.velocityConstant = velocityConstant;
     }
@@ -53,7 +54,7 @@ public abstract class MoveableGameModel extends GameModel {
      */
     public void applyEffects() {
         setCurrentVelocity(velocityConstant);
-        for (VelocityEffect velocityEffect : velocityEffects) {
+        for (VelocityEffect velocityEffect : velocityEffects.values()) {
             double multiplier = velocityEffect.getVelocityMultiplier();
             setCurrentVelocity(getCurrentVelocity() * multiplier);
         }

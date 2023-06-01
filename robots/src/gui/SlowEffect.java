@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static gui.Constants.SlowEffectConstants.*;
 
@@ -10,12 +12,7 @@ import static gui.Constants.SlowEffectConstants.*;
  */
 public class SlowEffect extends VelocityEffect {
     public SlowEffect(double XCoordinate, double YCoordinate) {
-        super(XCoordinate, YCoordinate);
-    }
-
-    @Override
-    public double getVelocityMultiplier() {
-        return SLOW_EFFECT_MULTIPLIER;
+        super(XCoordinate, YCoordinate, SLOW_EFFECT_DIAMETER, SLOW_EFFECT_DURATION, SLOW_EFFECT_MULTIPLIER);
     }
 
     @Override
@@ -28,5 +25,10 @@ public class SlowEffect extends VelocityEffect {
         GameVisualizer.fillOval(g, hastEffectCenterX, hasteEffectCenterY, SLOW_EFFECT_DIAMETER, SLOW_EFFECT_DIAMETER);
         g.setColor(Color.BLACK);
         GameVisualizer.drawOval(g, hastEffectCenterX, hasteEffectCenterY, SLOW_EFFECT_DIAMETER, SLOW_EFFECT_DIAMETER);
+    }
+
+    @Override
+    public VelocityEffect getNewInstance() {
+        return new SlowEffect(0, 0);
     }
 }

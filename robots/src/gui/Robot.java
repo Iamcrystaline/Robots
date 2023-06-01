@@ -38,7 +38,7 @@ public class Robot extends MoveableGameModel {
     }
 
     public Robot(double xCoordinate, double yCoordinate, double currentVelocity, double direction) {
-        super(xCoordinate, yCoordinate, currentVelocity, ROBOT_DEFAULT_VELOCITY);
+        super(xCoordinate, yCoordinate, currentVelocity, ROBOT_DEFAULT_VELOCITY, ROBOT_BODY_SECOND_DIAMETER);
         this.direction = direction;
     }
 

@@ -9,10 +9,16 @@ public abstract class GameModel {
 
     private double XCoordinate;
     private double YCoordinate;
+    private final double hitBoxRadius;
 
-    public GameModel(double XCoordinate, double YCoordinate) {
+    public double getHitBoxRadius() {
+        return hitBoxRadius;
+    }
+
+    public GameModel(double XCoordinate, double YCoordinate, double hitBoxRadius) {
         this.XCoordinate = XCoordinate;
         this.YCoordinate = YCoordinate;
+        this.hitBoxRadius = hitBoxRadius;
     }
 
     public double getXCoordinate() {

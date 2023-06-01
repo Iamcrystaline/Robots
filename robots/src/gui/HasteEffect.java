@@ -12,12 +12,7 @@ import static gui.Constants.HasteEffectConstants.*;
 public class HasteEffect extends VelocityEffect {
 
     public HasteEffect(double XCoordinate, double YCoordinate) {
-        super(XCoordinate, YCoordinate);
-    }
-
-    @Override
-    public double getVelocityMultiplier() {
-        return HASTE_EFFECT_MULTIPLIER;
+        super(XCoordinate, YCoordinate, HASTE_EFFECT_DIAMETER, HASTE_EFFECT_DURATION, HASTE_EFFECT_MULTIPLIER);
     }
 
     @Override
@@ -30,5 +25,10 @@ public class HasteEffect extends VelocityEffect {
         GameVisualizer.fillOval(g, hastEffectCenterX, hasteEffectCenterY, HASTE_EFFECT_DIAMETER, HASTE_EFFECT_DIAMETER);
         g.setColor(Color.BLACK);
         GameVisualizer.drawOval(g, hastEffectCenterX, hasteEffectCenterY, HASTE_EFFECT_DIAMETER, HASTE_EFFECT_DIAMETER);
+    }
+
+    @Override
+    public VelocityEffect getNewInstance() {
+        return new HasteEffect(0, 0);
     }
 }

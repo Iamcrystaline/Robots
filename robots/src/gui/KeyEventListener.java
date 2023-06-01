@@ -29,19 +29,19 @@ public class KeyEventListener extends KeyAdapter {
         int keyCode = e.getKeyCode();
         switch (keyCode) {
             case KeyEvent.VK_DOWN: {
-                target.setVerticalMoveMode(1);
+                target.setVerticalMoveMode(VerticalMoveModes.DOWN);
                 break;
             }
             case KeyEvent.VK_UP: {
-                target.setVerticalMoveMode(-1);
+                target.setVerticalMoveMode(VerticalMoveModes.UP);
                 break;
             }
             case KeyEvent.VK_RIGHT: {
-                target.setHorizontalMoveMode(1);
+                target.setHorizontalMoveMode(HorizontalMoveModes.RIGHT);
                 break;
             }
             case KeyEvent.VK_LEFT: {
-                target.setHorizontalMoveMode(-1);
+                target.setHorizontalMoveMode(HorizontalMoveModes.LEFT);
                 break;
             }
         }
@@ -56,10 +56,10 @@ public class KeyEventListener extends KeyAdapter {
     public void keyReleased(KeyEvent e) {
         int keyCode = e.getKeyCode();
         if (keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_UP) {
-            target.setVerticalMoveMode(0);
+            target.setVerticalMoveMode(VerticalMoveModes.STOP);
         }
         if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT) {
-            target.setHorizontalMoveMode(0);
+            target.setHorizontalMoveMode(HorizontalMoveModes.STOP);
         }
     }
 }
