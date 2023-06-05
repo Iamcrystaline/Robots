@@ -73,7 +73,7 @@ public interface Constants {
         public static final int ROBOT_HEAD_DIAMETER = 5;
         public static final double ROBOT_DEFAULT_VELOCITY = 0.1;
         public static final double ROBOT_ANGULAR_VELOCITY = 0.005;
-        public static final double ROBOT_STOP_DISTANCE = 0.5;
+        public static final double ROBOT_STOP_DISTANCE = 2;
     }
 
     class LoggerConstants {

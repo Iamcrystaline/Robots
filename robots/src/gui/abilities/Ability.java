@@ -2,6 +2,9 @@ package gui.abilities;
 
 import java.util.Timer;
 
+/**
+ * The main class for abilities
+ */
 public abstract class Ability {
 
     private final long cooldown;
@@ -36,5 +39,8 @@ public abstract class Ability {
         return duration;
     }
 
+    /**
+     * Method, which represents the ability action. This method has to change game objects' behaviour
+     */
     public abstract void use();
 }

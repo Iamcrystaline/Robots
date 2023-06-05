@@ -8,6 +8,9 @@ import java.util.TimerTask;
 import static gui.Constants.FreezeTimeAbilityConstants.FREEZE_TIME_ABILITY_COOLDOWN;
 import static gui.Constants.FreezeTimeAbilityConstants.FREEZE_TIME_ABILITY_DURATION;
 
+/**
+ * Class for freeze time ability
+ */
 public class FreezeTimeAbility extends Ability {
 
     private final List<Robot> robots;
@@ -17,6 +20,9 @@ public class FreezeTimeAbility extends Ability {
         this.robots = robots;
     }
 
+    /**
+     * Method freeze all the robots for FREEZE_TIME_ABILITY_DURATION milliseconds
+     */
     public void use() {
         if (!isOnCooldown()) {
             robots.forEach(robot -> robot.setFrozen(true));
